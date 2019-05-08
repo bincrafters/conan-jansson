@@ -1,10 +1,10 @@
 ## Package Status
 
-| Bintray | Windows | Linux & macOS | 
+| Bintray | Windows | Linux & macOS |
 |:--------:|:---------:|:-----------------:|
-|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/jansson%3Abincrafters/images/download.svg?version=2.11%3Astable) ](https://bintray.com/bincrafters/public-conan/jansson%3Abincrafters/2.11%3Astable/link)|[![Build status](https://ci.appveyor.com/api/projects/status/ciwx9rgeci1cywpr/branch/stable/2.11?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-jansson/branch/stable/2.11)|[![Build Status](https://travis-ci.org/bincrafters/conan-jansson.svg?branch=stable%2F2.11)](https://travis-ci.org/bincrafters/conan-jansson)|
+|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/jansson%3Abincrafters/images/download.svg?version=2.11%3Astable) ](https://bintray.com/bincrafters/public-conan/jansson%3Abincrafters/2.11%3Astable/link)|[![Build status](https://ci.appveyor.com/api/projects/status/ciwx9rgeci1cywpr/branch/stable/2.11?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-jansson/branch/stable/2.11)|[![Build Status](https://travis-ci.com/bincrafters/conan-jansson.svg?branch=stable%2F2.11)](https://travis-ci.com/bincrafters/conan-jansson)|
 
-## Conan.io Information
+## Conan Information
 
 Bincrafters packages can be found in the following public Conan repository:
 
