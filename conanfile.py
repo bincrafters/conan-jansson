@@ -35,7 +35,7 @@ class JanssonConan(ConanFile):
     _build_subfolder = "build_subfolder"
 
     def source(self):
-        sha256="6e85f42dabe49a7831dbdd6d30dca8a966956b51a9a50ed534b82afc3fa5b2f4"
+        sha256 = "6e85f42dabe49a7831dbdd6d30dca8a966956b51a9a50ed534b82afc3fa5b2f4"
         tools.get("{0}/releases/jansson-{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
@@ -52,7 +52,7 @@ class JanssonConan(ConanFile):
         cmake.definitions["JANSSON_BUILD_DOCS"] = False
         cmake.definitions["JANSSON_BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["JANSSON_EXAMPLES"] = False
-        cmake.definitions["JANSSON_WITHOUT_TESTS"] = False
+        cmake.definitions["JANSSON_WITHOUT_TESTS"] = True
         cmake.definitions["USE_URANDOM"] = self.options.use_urandom
         cmake.definitions["USE_WINDOWS_CRYPTOAPI"] = self.options.use_windows_cryptoapi
 
