@@ -7,7 +7,7 @@ import os
 
 class JanssonConan(ConanFile):
     name = "jansson"
-    version = "2.11"
+    version = "2.12"
     description = "C library for encoding, decoding and manipulating JSON data"
     topics = ("conan", "jansson", "json", "encoding", "decoding", "manipulation")
     url = "https://github.com/bincrafters/conan-jansson"
@@ -35,7 +35,7 @@ class JanssonConan(ConanFile):
     _build_subfolder = "build_subfolder"
 
     def source(self):
-        sha256 = "6e85f42dabe49a7831dbdd6d30dca8a966956b51a9a50ed534b82afc3fa5b2f4"
+        sha256 = "5f8dec765048efac5d919aded51b26a32a05397ea207aa769ff6b53c7027d2c9"
         tools.get("{0}/releases/jansson-{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
