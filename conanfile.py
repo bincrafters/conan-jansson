@@ -8,9 +8,10 @@ import os
 class JanssonConan(ConanFile):
     name = "jansson"
     version = "2.11"
+    description = "C library for encoding, decoding and manipulating JSON data"
+    topics = ("conan", "jansson", "json", "encoding", "decoding", "manipulation")
     url = "https://github.com/bincrafters/conan-jansson"
     homepage = "http://www.digip.org/jansson/"
-    description = "C library for encoding, decoding and manipulating JSON data"
     author = "Bincrafters <bincrafters@gmail.com>"
     license = "MIT"
     exports = ["LICENSE.md"]
@@ -23,15 +24,21 @@ class JanssonConan(ConanFile):
         "use_urandom": [True, False],
         "use_windows_cryptoapi": [True, False]
     }
-    default_options = ("shared=False", "fPIC=True", "use_urandom=True",
-                       "use_windows_cryptoapi=True")
-    source_subfolder = "source_subfolder"
-    build_subfolder = "build_subfolder"
+    default_options = {
+        'shared': False,
+        'fPIC': True,
+        'use_urandom': True,
+        'use_windows_cryptoapi': True
+    }
+
+    _source_subfolder = "source_subfolder"
+    _build_subfolder = "build_subfolder"
 
     def source(self):
-        tools.get("{0}/releases/jansson-{1}.tar.gz".format(self.homepage, self.version))
+        sha256 = "6e85f42dabe49a7831dbdd6d30dca8a966956b51a9a50ed534b82afc3fa5b2f4"
+        tools.get("{0}/releases/jansson-{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
-        os.rename(extracted_dir, self.source_subfolder)
+        os.rename(extracted_dir, self._source_subfolder)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -40,12 +47,12 @@ class JanssonConan(ConanFile):
     def configure(self):
         del self.settings.compiler.libcxx
 
-    def configure_cmake(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["JANSSON_BUILD_DOCS"] = False
         cmake.definitions["JANSSON_BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["JANSSON_EXAMPLES"] = False
-        cmake.definitions["JANSSON_WITHOUT_TESTS"] = False
+        cmake.definitions["JANSSON_WITHOUT_TESTS"] = True
         cmake.definitions["USE_URANDOM"] = self.options.use_urandom
         cmake.definitions["USE_WINDOWS_CRYPTOAPI"] = self.options.use_windows_cryptoapi
 
@@ -53,16 +60,16 @@ class JanssonConan(ConanFile):
             if "MT" in self.settings.compiler.runtime:
                 cmake.definitions["JANSSON_STATIC_CRT"] = True
 
-        cmake.configure(build_folder=self.build_subfolder)
+        cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
     def build(self):
-        cmake = self.configure_cmake()
+        cmake = self._configure_cmake()
         cmake.build()
 
     def package(self):
-        self.copy("LICENSE", dst="licenses", src=self.source_subfolder)
-        cmake = self.configure_cmake()
+        self.copy("LICENSE", dst="licenses", src=self._source_subfolder)
+        cmake = self._configure_cmake()
         cmake.install()
 
     def package_info(self):
